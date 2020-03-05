@@ -10,6 +10,7 @@ using Tensorflow;
 using Console = Colorful.Console;
 using static Tensorflow.Binding;
 using MOOC_TF_Study._9;
+using System.IO;
 
 namespace MOOC_TF_Study
 {
@@ -20,7 +21,11 @@ namespace MOOC_TF_Study
             Console.WriteLine("Hello World!");
             CheckTFVersion();
 
-            _9_1_4.Run();
+            //TestSaverFolder();
+
+            //return;
+
+            _9_2_5.Run();
         }
 
         static void CheckTFVersion()
@@ -30,6 +35,39 @@ namespace MOOC_TF_Study
             Console.WriteLine($"TensorFlow Binary v{tf.VERSION}", Color.Yellow);
             Console.WriteLine($"TensorFlow.NET v{Assembly.GetAssembly(typeof(TF_DataType)).GetName().Version}", Color.Yellow);
 
+        }
+
+
+        static void TestSaverFolder()
+        {
+            var sess = tf.Session();
+
+            tf.Variable(tf.zeros(10), name: "z");
+
+            var init = tf.global_variables_initializer();
+            sess.run(init);
+
+            CheckFolder(sess, "Test"); // ok lastcheckpoint is "Test/2.tf"
+            CheckFolder(sess, @"r:\Test"); // ok 
+            CheckFolder(sess, @"..\..\Test"); // ok
+            CheckFolder(sess, @"r:/Test"); // fail
+            CheckFolder(sess, "../../Test"); // fail
+        }
+
+        private static void CheckFolder(Session sess, string path)
+        {
+            if (!Directory.Exists(path))
+                Directory.CreateDirectory(path);
+
+            // Console.WriteLine(new FileInfo(path).FullName);
+
+            var saver = tf.train.Saver();
+
+            saver.save(sess, Path.Combine(path, "1.tf"));
+            saver.save(sess, Path.Combine(path, "2.tf"));
+
+            var l = tf.train.latest_checkpoint(path);
+            Console.WriteLine(l);
         }
     }
 }
