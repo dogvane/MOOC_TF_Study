@@ -5,8 +5,8 @@ using System.Linq;
 using MOOC_TF_Study.Common;
 using NumSharp;
 using Tensorflow;
-using Tensorflow.Hub;
 using static Tensorflow.Binding;
+using Tensorflow.Hub;
 
 namespace MOOC_TF_Study._9
 {
@@ -50,8 +50,8 @@ namespace MOOC_TF_Study._9
 
             // var loss_function = tf.reduce_mean(-tf.reduce_sum(y * tf.log(pred), reduction_indices: 1));
             var loss_function = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(labels: y, logits: forward));
-            // var optimizer = tf.train.GradientDescentOptimizer(learning_rate).minimize(loss_function);
-            var optimizer = tf.train.AdamOptimizer(learning_rate, TF_DataType.TF_DOUBLE).minimize(loss_function);
+            var optimizer = tf.train.GradientDescentOptimizer(learning_rate).minimize(loss_function);
+            // var optimizer = tf.train.AdamOptimizer(learning_rate, TF_DataType.TF_DOUBLE).minimize(loss_function);
 
             var correct_prediction = tf.equal(tf.argmax(pred, 1), tf.argmax(y, 1));
             var accuracy = tf.reduce_mean(tf.cast(correct_prediction, TF_DataType.TF_DOUBLE));

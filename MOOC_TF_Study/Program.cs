@@ -11,6 +11,7 @@ using Console = Colorful.Console;
 using static Tensorflow.Binding;
 using MOOC_TF_Study._9;
 using System.IO;
+using MOOC_TF_Study._10;
 
 namespace MOOC_TF_Study
 {
@@ -19,13 +20,13 @@ namespace MOOC_TF_Study
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
-            CheckTFVersion();
+            // CheckTFVersion();
 
             //TestSaverFolder();
 
             //return;
 
-            _9_2_5.Run();
+            _10_4_1.Run();
         }
 
         static void CheckTFVersion()
