@@ -8,6 +8,7 @@ using NumSharp;
 using ICSharpCode.SharpZipLib.GZip;
 using ICSharpCode.SharpZipLib.Tar;
 using System.Threading;
+using System.Diagnostics;
 
 namespace Tensorflow.Hub
 {
@@ -114,6 +115,22 @@ namespace Tensorflow.Hub
 
             var trainFiles = TRAIN_FILE.Select(o => Path.Combine(setting.TrainDir, "cifar-10-batches-bin", o)).ToArray();
             var (train_images, train_labels) = LoadData(trainFiles);
+
+            //List<NDArray> images = new List<NDArray>();
+            //List<NDArray> lables = new List<NDArray>();
+
+            //foreach(var file in TRAIN_FILE)
+            //{
+            //    var fileName = Path.Combine(setting.TrainDir, "cifar-10-batches-bin", file);
+            //    var (i, l) = LoadData(fileName);
+            //    images.Add(i);
+            //    lables.Add(l);
+            //}
+
+            //var watch = Stopwatch.StartNew();
+            //var train_images = np.concatenate(images.ToArray());
+            //var train_labels = np.concatenate(lables.ToArray());
+            //Console.WriteLine("concatenate time:{0}", watch.Elapsed);
 
             var testBinFile = Path.Combine(setting.TrainDir, "cifar-10-batches-bin", TEST_FILE);
             var (test_images, test_labels) = LoadData(testBinFile);
