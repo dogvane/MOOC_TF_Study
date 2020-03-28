@@ -80,8 +80,6 @@ namespace MOOC_TF_Study._7
 
                     var loss_average = loss_sum / indexArray.Length;
                     
-                    // indexArray.Shuffle();
-
                     Console.WriteLine($"epoch={i} loss={loss_average} b={b0temp} w={w0temp}");
                 }
 
@@ -108,7 +106,6 @@ namespace MOOC_TF_Study._7
         /// <param name="csvArray"></param>
         private static void normalization(float[][] csvArray)
         {
-
             for (var y = 0; y < 12; y++)
             {
                 var max = 0.0;

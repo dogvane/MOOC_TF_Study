@@ -26,8 +26,7 @@ namespace MOOC_TF_Study
 
             //return;
 
-                         _10_4_3.Run();
-            // _9_2_4.Run();
+            _9_1_4.Run();
         }
 
         static void CheckTFVersion()

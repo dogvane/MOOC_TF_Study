@@ -44,6 +44,8 @@ namespace MOOC_TF_Study._6
 
             var w = tf.Variable(1.0, name: "w0");
             var b = tf.Variable(0.0, name: "b0");
+            
+            // Func<Tensor,Tensor,Tensor,Tensor> model = (x, w, b) => { return tf.multiply(x, w) + b; };
 
             var pred = model(x, w, b);
 

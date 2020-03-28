@@ -14,6 +14,7 @@ namespace Tensorflow.Hub
 {
     public class Cifar10ModelLoader : IModelLoader<Cifar10DataSet>
     {
+        // C# 版本不能下载python的数据文件，得现在c版本的数据文件，别下错了
         private const string DEFAULT_SOURCE_URL = "http://www.cs.toronto.edu/~kriz/cifar-10-binary.tar.gz";
         private const string DEFAULT_LOCAL_DOWNLOAD_FILENAME = "cifar-10-binary.tar.gz";
 

@@ -1,4 +1,5 @@
 ﻿using NumSharp;
+using NumSharp.Backends.Unmanaged;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -21,6 +22,31 @@ namespace Tensorflow.Hub
 
             Data = images;
             Labels = labels;
+        }
+
+        /// <summary>
+        /// 将数据集的数据做归一化处理
+        /// </summary>
+        public void NormalizeData()
+        {
+            // 训练集和数据集的图形数据做归一化
+            Data = Data.astype(NPTypeCode.Double) / 255.0;
+            Labels = DenseToOneHot(Labels, 10);
+        }
+
+
+        private static NDArray DenseToOneHot(NDArray labels_dense, int num_classes)
+        {
+            int stop = labels_dense.shape[0];
+            NDArray ndArray1 = np.arange(stop) * num_classes;
+            NDArray ndArray2 = np.zeros(stop, num_classes);
+            ArraySlice<byte> arraySlice = labels_dense.Data<byte>();
+            for (int index = 0; index < stop; ++index)
+            {
+                byte num = arraySlice[index];
+                ndArray2.SetData((NDArray)1.0, index, (int)num);
+            }
+            return ndArray2;
         }
 
         public (NDArray, NDArray) GetNextBatch(int batch_size, bool fake_data = false, bool shuffle = true)

@@ -42,5 +42,11 @@ namespace MOOC_TF_Study._7
             Console.WriteLine($"vector_column {vector_column} vector_column.T {vector_column.T}");
         }
 
+        private static void fun2()
+        {
+            var matrix_a = np.array(new[,] { { 1, 2, 3 }, { 4, 5, 6 } });
+            Console.WriteLine($"vector_row:{matrix_a} shape={matrix_a.Shape}");
+            Console.WriteLine($"{matrix_a.T} .Tshape={matrix_a.T.Shape}");
+        }
     }
 }

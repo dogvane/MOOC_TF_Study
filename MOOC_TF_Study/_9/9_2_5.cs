@@ -79,12 +79,12 @@ namespace MOOC_TF_Study._9
                 sess.run(init);
                 var saver = tf.train.Saver();
 
-                //var ckpt = tf.train.get_checkpoint_state(savePath);
-                //if(ckpt != null && !string.IsNullOrWhiteSpace(ckpt.ModelCheckpointPath))
-                //{
-                //    saver.restore(sess, ckpt.ModelCheckpointPath);
-                //    Console.WriteLine("模型已恢复");
-                //}
+                var ckpt = tf.train.get_checkpoint_state(savePath);
+                if (ckpt != null && !string.IsNullOrWhiteSpace(ckpt.ModelCheckpointPath))
+                {
+                    saver.restore(sess, ckpt.ModelCheckpointPath);
+                    Console.WriteLine("模型已恢复");
+                }
 
                 var lastFile = tf.train.latest_checkpoint(savePath);
                 Console.WriteLine(lastFile);

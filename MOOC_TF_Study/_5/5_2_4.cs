@@ -27,7 +27,12 @@ namespace MOOC_TF_Study._5
             using (var sess = tf.Session())
             {
                 sess.run(init);
-                var result = sess.run(c, feed_dict: new[] {new FeedItem(a, 8.0), new FeedItem(b, 3.5)});
+                var result = sess.run(c, 
+                                feed_dict: new[] {
+                                    new FeedItem(a, 8.0),
+                                    new FeedItem(b, 3.5)
+                                });
+
                 Console.WriteLine(result.ToString());
             }
         }

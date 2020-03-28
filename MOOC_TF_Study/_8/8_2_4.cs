@@ -25,7 +25,7 @@ namespace MOOC_TF_Study._8
             var x = tf.placeholder(TF_DataType.TF_DOUBLE, (-1, 784), name: "x");
             var y = tf.placeholder(TF_DataType.TF_DOUBLE, (-1, 10), name: "y");
 
-            var w = tf.Variable(tf.random_normal((784, 10), dtype: TF_DataType.TF_DOUBLE), dtype: TF_DataType.TF_DOUBLE, name: "x");
+            var w = tf.Variable(tf.random_normal((784, 10), dtype: TF_DataType.TF_DOUBLE), dtype: TF_DataType.TF_DOUBLE, name: "w");
             var b = tf.Variable(tf.zeros(10, dtype: TF_DataType.TF_DOUBLE), dtype: TF_DataType.TF_DOUBLE, name: "b");
 
             var forward = tf.matmul(x, w) + b;
@@ -58,8 +58,15 @@ namespace MOOC_TF_Study._8
                     }
 
                     var (loss, acc) = sess.run((loss_function, accuracy),
-                        new FeedItem(x, mnist.Validation.Data),
-                        new FeedItem(y, mnist.Validation.Labels));
+                        new FeedItem(x, mnist.Test.Data),
+                        new FeedItem(y, mnist.Test.Labels));
+
+                    var accu_test = sess.run(accuracy, new FeedItem(x, mnist.Test.Data),
+                                        new FeedItem(y, mnist.Test.Labels));
+
+                    var accu_validation = sess.run(accuracy, new FeedItem(x, mnist.Validation.Data),
+                                                             new FeedItem(y, mnist.Validation.Labels));
+
 
                     if ((epoch + 1) % display_step == 0)
                         Console.WriteLine($"train epoch:{epoch + 1}   loss={loss} accuracy={acc}");

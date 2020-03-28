@@ -17,9 +17,10 @@ namespace MOOC_TF_Study._9
             fun1();
         }
 
-        static Tensor fcn_layer(Tensor inputs, int input_dim, int output_dim, Func<Tensor, string, Tensor> activation, string activationName=null)
+        static Tensor fcn_layer(Tensor inputs, int input_dim, int output_dim,
+            Func<Tensor, string, Tensor> activation, string activationName = null)
         {
-            var w = tf.Variable(tf.truncated_normal((input_dim, output_dim), stddev: 0.1f, dtype:TF_DataType.TF_DOUBLE));
+            var w = tf.Variable(tf.truncated_normal((input_dim, output_dim), stddev: 0.1f, dtype: TF_DataType.TF_DOUBLE));
             var b = tf.Variable(tf.zeros((output_dim), TF_DataType.TF_DOUBLE));
 
             var xwb = tf.matmul(inputs, w) + b;

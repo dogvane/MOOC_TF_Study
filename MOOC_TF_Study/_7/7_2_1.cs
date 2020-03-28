@@ -64,6 +64,7 @@ namespace MOOC_TF_Study._7
 
             var matrix_e = matrix_a + matrix_d;
             Console.WriteLine($"matrix_e: {matrix_e} matrix_e.shape={matrix_e.Shape}");
+
         }
 
     }
